@@ -1,14 +1,16 @@
 # Python programme to generate some no.of random passwords
 import random
+import string
+char_list = string.ascii_letters + string.digits + string.punctuation
 # characters which are being used in generating the password
-char_list = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
-             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
-             'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
-             'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D',
-             'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
-             'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
-             'Y', 'Z', '!', '@', '#', '$', '%', '^', '&', '*',
-             '(', ')', '-', '_', '+', '=', '.']
+# char_list = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
+#              'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+#              'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+#              'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D',
+#              'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
+#              'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
+#              'Y', 'Z', '!', '@', '#', '$', '%', '^', '&', '*',
+#              '(', ')', '-', '_', '+', '=', '.']
 
 FILE = 'random_passwords.txt'
 
@@ -17,16 +19,17 @@ def get_number(propmpt):
     while True:
         num = input(propmpt).strip()
         try:
-            num = int(num)
+            if (int(num) <= 0):
+                print('Enter positive integers only.')
+            else:
+                return int(num)
         except ValueError:
             print('Invalid numerical value. Please enter valid numerical value.')
-        else:
-            return num
         
 
 def generate_random_password(length):
     '''Function to generate random password of the given length'''
-    password = random.choices(char_list, k= length)
+    password = random.sample(char_list, k= length)
     return ''.join(password)
 
 
